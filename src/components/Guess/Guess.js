@@ -1,18 +1,22 @@
 import React from "react";
+import { range } from "../../utils";
 
-function Guess({ word = " ".repeat(5) }) {
-  // invariant
-  if (word.length != 5) {
-    throw Error("guesses must be exactly 5 chars");
-  }
-
+function Guess({ guess }) {
+  guess = guess ?? [];
   return (
     <p className="guess">
-      <span className="cell">{word[0]}</span>
-      <span className="cell">{word[1]}</span>
-      <span className="cell">{word[2]}</span>
-      <span className="cell">{word[3]}</span>
-      <span className="cell">{word[4]}</span>
+      {range(5).map((n) => {
+        // prettier-ignore
+        const className = (guess[n]
+          ? `cell ${guess[n].status}`
+          : "cell"
+        )
+        return (
+          <span key={n} className={className}>
+            {guess[n] ? guess[n].letter : undefined}
+          </span>
+        );
+      })}
     </p>
   );
 }

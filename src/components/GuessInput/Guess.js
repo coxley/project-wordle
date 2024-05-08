@@ -1,6 +1,6 @@
 import React from "react";
 
-function Guess({ onSubmit }) {
+function Guess({ disabled, onSubmit }) {
   const [value, setValue] = React.useState("");
   return (
     <form
@@ -14,6 +14,7 @@ function Guess({ onSubmit }) {
       <label htmlFor="guess-input">Enter guess:</label>
       <input
         id="guess-input"
+        disabled={disabled}
         value={value}
         onChange={(e) => setValue(e.target.value.toUpperCase())}
         type="text"
